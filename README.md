@@ -12,11 +12,28 @@ __Note__ — You can also check out [this blog post](https://sumit-ghosh.com/art
 
 ## Contents
 
+- [Notes for AWS Certified Solutions Architect Associate](#notes-for-aws-certified-solutions-architect-associate)
+  - [Contents](#contents)
 - [Well-Architected Framework](#well-architected-framework)
-- [Route 53](#route53)
+  - [Operational Excellence](#operational-excellence)
+    - [Design Principles](#design-principles)
+    - [Best Practices](#best-practices)
+  - [Security](#security)
+    - [Design Principles](#design-principles-1)
+    - [Best Practices](#best-practices-1)
+  - [Reliability](#reliability)
+    - [Design Principles](#design-principles-2)
+    - [Best Practices](#best-practices-2)
+  - [Performance Efficiency](#performance-efficiency)
+    - [Design Principles](#design-principles-3)
+    - [Best Practices](#best-practices-3)
+  - [Cost Optimization](#cost-optimization)
+    - [Design Principles](#design-principles-4)
+    - [Best Practices](#best-practices-4)
+- [Route53](#route53)
 - [S3](#s3)
-- [RDS, Redshift and ElastiCache](##rds-redshift-and-elasticache)
-- [EBS](#ec2-and-ebs)
+- [RDS, Redshift and ElastiCache](#rds-redshift-and-elasticache)
+- [EC2 and EBS](#ec2-and-ebs)
 - [EFS](#efs)
 - [ELB and Autoscaling](#elb-and-autoscaling)
 - [SQS](#sqs)
@@ -254,12 +271,16 @@ In the __CORS__ configuration, the __exact URLs__ must be added, with the correc
 
 __S3__ does not support `OPTIONS`, `CONNECT` and `TRACE` __methods__. 
 
+__S3__ does not transition objects that are smaller than `128 KB` to the __STANDARD_IA__ or __ONEZONE_IA__ storage classes because it's not cost effective.
+
 __S3 encryptions__ —
 - SSE-S3: Data and master keys managed by S3.
 - SSE-C: The user manages the encryption keys.
 - SSE-KMS: AWS manages the data key, the user manages the master key.
 
 To make sure that S3 objects are only accessible from Cloudfront, create an __Origin Access Identity (OAI) for Cloudfront__ and grant access to the objects to that OAI.
+
+you can only change the storage class of your objects from S3 Standard storage class to  STANDARD_IA or ONEZONE_IA storage after 30 days
 
 We can create __event notification in S3__ to __invoke lambda__ function.
 
@@ -323,6 +344,8 @@ To enable __multi-region replication of RDS__, we have to use __Read Replicas__.
 __RDS Read Replicas__ are __synced asynchronously__, so it can have __replication lag__.
 
 __Redshift automated snapshot retention period__ — 1 day to 35 days.
+
+Audit Logging feature is primarily used to get the information about the connection, queries, and user activities in __Redshift__ cluster.
 
 We can't use auto-scaling with __RDS__. To improve __performance__, we should look to __sharding__ instead. Starting from __June 20__, we __can use auto-scaling__ with RDS instances.
 
@@ -507,6 +530,8 @@ __Monitoring Application Load Balancers__ —
 3. Request tracing
 4. Cloudtrail logs.
 
+Application Load Balancers support __Weighted Target Groups__ routing.
+
 Adding __lifecycle hooks__ to ASGs put instances in __wait state__ before termination. During this wait state, we can perform custom activities. Default wait period is 1 hour.
 
 
@@ -524,6 +549,8 @@ __Auto-scaling__ ensures —
 - Availability
 
 __ELBs__ can manage traffic within a region and not between regions.
+
+By default, the load balancer routes requests __evenly__ across its Availability Zones.
 
 __For unstable scaling behavior__, that is scaling multiple times frequently, the following things can be done —
 
@@ -812,6 +839,8 @@ The __allowed block size__ in VPC is between a /16 netmask (65,536 IP addresses)
 
 We can move part of our __on-premise address space to AWS__. This is called BYOIP. For this, we have to acquire a __ROA, Root Origin Authorization__ from the the regional internet registry and submit it to Amazon.
 
+VPC does not support __multicast__ or __broadcast networking__.
+
 
 
 # DynamoDB
@@ -1086,3 +1115,13 @@ __Third party SSL cert__ can be imported into —
 
 - AWS Certificate Manager
 - IAM Certificate Store
+
+Transit Gateway is a service that enables customers to connect their Amazon Virtual Private Clouds (VPCs) and their on-premises networks to a single gateway
+
+Resource Access Manager (RAM) is a service that enables you to easily and securely share AWS resources with any AWS account or within your AWS Organization.
+
+AWS hosts a variety of public datasets that anyone can access for __free__.
+
+most AWS services use VPC Interface Endpoint except for __S3__ and __DynamoDB__, which use __VPC Gateway Endpoint__.
+
+__DataSync__ is primarily used to simplify migration with AWS. It makes it simple and fast to move large amounts of data online between on-premises storage and S3 or EFS.
