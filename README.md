@@ -261,6 +261,8 @@ __AWS Glacier archive retrieval__ options —
 - Standard: Default, 3-5 hours.
 - Bulk: Cheapest, 5-12 hours.
 
+you cannot upload objects to __Glacier__ directly through the Management Console.
+
 To increase performance, we can __prefix each object name with a hash key__ along with the current date. But, according to the new S3 performance announcement, this is __not needed anymore__.
 
 __Increasing performance in S3__ —
@@ -815,6 +817,10 @@ __VPN__ is established over a __Virtual Private Gateway__.
 
 AWS __VPC Endpoints support S3 and DynamoDB__. For __Amazon ECR__, we have to use __AWS PrivateLink__.
 
+most AWS services use VPC Interface Endpoint except for __S3__ and __DynamoDB__, which use __VPC Gateway Endpoint__.
+
+__Egress only Internet Gateway__ is for IPv6 only.
+
 __Difference between DirectConnect and VPN__ — DirectConnect does not involve the Internet, while VPN does.
 
 __AWS Direct Connect__ doesn't __encrypt in transit data__, while __VPN__ does.
@@ -1122,6 +1128,6 @@ Resource Access Manager (RAM) is a service that enables you to easily and secure
 
 AWS hosts a variety of public datasets that anyone can access for __free__.
 
-most AWS services use VPC Interface Endpoint except for __S3__ and __DynamoDB__, which use __VPC Gateway Endpoint__.
-
 __DataSync__ is primarily used to simplify migration with AWS. It makes it simple and fast to move large amounts of data online between on-premises storage and S3 or EFS.
+
+__Global Accelerator__ is a service that improves the availability and performance of your applications with local or global users
