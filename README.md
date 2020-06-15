@@ -1,6 +1,6 @@
 # Notes for AWS Certified Solutions Architect Associate
 
-I recently got the AWS solutions architect associate certificate in July 2019, and wanted to share my notes with anyone who might benefit from it. The path I followed was
+I recently got the AWS solutions architect associate certificate in June 2020, and wanted to share my notes with anyone who might benefit from it. The path I followed was
 
 - Go through the [ACloudGuru course](https://click.linksynergy.com/deeplink?id=aosskmXRdYk&mid=39197&murl=https%3A%2F%2Fwww.udemy.com%2Faws-certified-solutions-architect-associate%2F).
 - Attempt the [Whizlabs practice tests](https://www.whizlabs.com/aws-solutions-architect-associate/). After each test, note down the concepts I had difficulties with. 
@@ -1131,3 +1131,5 @@ AWS hosts a variety of public datasets that anyone can access for __free__.
 __DataSync__ is primarily used to simplify migration with AWS. It makes it simple and fast to move large amounts of data online between on-premises storage and S3 or EFS.
 
 __Global Accelerator__ is a service that improves the availability and performance of your applications with local or global users
+
+__Macie__ is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data
